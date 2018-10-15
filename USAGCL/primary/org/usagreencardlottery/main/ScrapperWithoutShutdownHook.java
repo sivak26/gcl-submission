@@ -50,7 +50,7 @@ public class ScrapperWithoutShutdownHook {
         int startId = 0;
         int endId = 0;
         int currentYear = Calendar.getInstance().get(Calendar.YEAR);
-        String photoUploadCutOffDate = Integer.toString(currentYear - 1) + "-11-23 00:00:00";
+        String photoUploadCutOffDate = Integer.toString(currentYear - 1) + "-11-08 00:00:00";
 
         if (args.length > 0) {
             startId = Integer.parseInt(args[0]);
@@ -76,7 +76,7 @@ public class ScrapperWithoutShutdownHook {
                     + "where Registration.is_eligible = 1 and "
                     + "Application.applicationStatus = 10 and "
                     + "EligibilityHistory.endYear >= " + currentYear + " and "
-                    + "(Application.post2009 is NULL or Application.post2009 != 20) and "
+                    + "(Application.post2009 is NULL or Application.post2009 != 18) and "
                     + "Registration.userId = Application.userId and "
                     + "Registration.userId = EligibilityHistory.userId and "
                     + "Registration.userId = Contact.userId and "
@@ -134,8 +134,8 @@ public class ScrapperWithoutShutdownHook {
                                 }
                                 ScrapLog.info("NEED TO CHECK IF THIS APPLICATION WAS ALREADY SUBMITTED");
 
-                                boolean submitPrimary = (getSubmissionStatus(applicationId) < 19);
-                                boolean submitSpouse = isSpouseIncluded && getSubmissionStatus(applicationId) != 20;
+                                boolean submitPrimary = (getSubmissionStatus(applicationId) < 17);
+                                boolean submitSpouse = isSpouseIncluded && getSubmissionStatus(applicationId) != 18;
 
                                 //BEGIN NEW CHANGES BASED ON THE MARITAL STATUS
                                 needSubmission = isApplicantMaritalStatusKnown && (submitPrimary || submitSpouse);
@@ -152,7 +152,7 @@ public class ScrapperWithoutShutdownHook {
                                 //BEGIN NEW CHANGES BASED ON THE MARITAL STATUS
                                 if (!needSubmission) {
                                     action = "SUBMISSION NOT REQUIRED";
-                                    if (getSubmissionStatus(applicationId) > 18) {
+                                    if (getSubmissionStatus(applicationId) > 16) {
                                         ScrapLog.info("APPLICATION WAS ALREADY SUBMITTED | " + postCount);
                                     } else if (!isApplicantMaritalStatusKnown) {
                                         ScrapLog.info("APPLICANT MARITAL STATUS UNKNOWN FOR THE USER WITH USER-ID : " + userId);
@@ -170,7 +170,7 @@ public class ScrapperWithoutShutdownHook {
                                         if (thisPost.submitApplication("P")) {
                                             ScrapLog.info("Primary Applicant submitted...");
                                             ScrapLog.info("PLEASE WAIT WHILE WE ARE SAVING THE APPLICANT'S SUBMISSION STATUS TO OUR SYSTEM....");
-                                            updatePost(thisApp.getUserId(), 19);
+                                            updatePost(thisApp.getUserId(), 17);
                                             action = action + "PRIMARY SUBMITTED";
                                             postCount = 1;
                                         }
@@ -185,7 +185,7 @@ public class ScrapperWithoutShutdownHook {
                                             ScrapLog.info("ATTEMPTING TO SUBMIT THE SPOUSE APPLICATION");
                                             if (thisPost.submitApplication("S")) {
                                                 ScrapLog.info("PLEASE WAIT WHILE WE ARE SAVING THE SPOUSE'S SUBMISSION STATUS TO OUR SYSTEM....");
-                                                updatePost(thisApp.getUserId(), 20);
+                                                updatePost(thisApp.getUserId(), 18);
                                                 action = action + "/ SPOUSE SUBMITTED";
                                                 postCount = 2;
                                                 ScrapLog.info("Spouse Application submitted...");

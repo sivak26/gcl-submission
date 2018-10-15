@@ -1,8 +1,8 @@
 #!/bin/bash
 
-JAVA_HOME=/usr/local/jdk1.8.0_60/
+JAVA_HOME=/usr/local/jdk1.5.0_07
 
-cd /home/upload/update/2018/primary;
+cd /home/upload/update/2017/primary;
 
 if [ $# -lt 2 ]
 then
