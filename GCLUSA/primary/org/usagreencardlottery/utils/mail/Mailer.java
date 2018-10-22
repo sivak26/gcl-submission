@@ -16,8 +16,8 @@ public class Mailer implements Serializable {
         try {
 
             Properties props = new Properties();
-            props.put("mail.host", "mail.usagreencardlottery.org");
-            props.put("mail.smtp.host", "mail.usagreencardlottery.org");
+            props.put("mail.host", "mail.greencardlotteryusa.org");
+            props.put("mail.smtp.host", "mail.greencardlotteryusa.org");
             props.put("mail.smtp.port", "587");
             Session mailConnection = Session.getInstance(props, null);
 
@@ -132,8 +132,8 @@ public class Mailer implements Serializable {
         try {
 
             Properties props = new Properties();
-            props.put("mail.host", "mail.usagreencardlottery.org");
-            props.put("mail.smtp.host", "mail.usagreencardlottery.org");
+            props.put("mail.host", "mail.greencardlotteryusa.org");
+            props.put("mail.smtp.host", "mail.greencardlotteryusa.org");
             props.put("mail.smtp.port", "587");
             Session mailConnection = Session.getInstance(props, null);
 
@@ -147,7 +147,7 @@ public class Mailer implements Serializable {
 
             msg.setFrom(from);
             msg.setRecipients(Message.RecipientType.TO, to);
-            msg.setRecipients(Message.RecipientType.BCC, "cs-usagcl2013@usagreencardlottery.org");
+            //msg.setRecipients(Message.RecipientType.BCC, "cs-usagcl2013@greencardlotteryusa.org");
             //msg.setRecipients(Message.RecipientType.BCC, "mageshwaran@dcis.net");
             msg.setSubject(subject);
             msg.setContent(messageBody, "text/html");
