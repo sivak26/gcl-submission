@@ -106,12 +106,10 @@ public class ScrapperWithoutShutdownHook {
                         // the payment-plan not expired
                         // not already a winner
                         // there is a payment connected to this application
-                        // is the application not in the submisstion skip list
                         if (isPaymentConnected(applicationId)
                                 && endYear >= currentYear
                                 && winner == 0
-                                && isLatestPhotoUploaded(userId, photoUploadCutOffDate)
-                                && isNotInSkipList(userId)) {
+                                && isLatestPhotoUploaded(userId, photoUploadCutOffDate)) {
                             comments = "Need to service";
                             additional = "All Applications whose Validity is " + currentYear + "  OR  Longer Than " + currentYear;
                         }
